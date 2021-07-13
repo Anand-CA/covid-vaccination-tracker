@@ -3,8 +3,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Dropdown } from "semantic-ui-react";
 import Card from "../components/Card";
-import faker from "faker";
-import _ from "lodash";
+
 
 export default function Home({ states }) {
   const [stateId, setStateId] = useState(0);
@@ -33,7 +32,7 @@ export default function Home({ states }) {
       setStates(data);
     };
     structureState();
-  }, []);
+  }, [states]);
 
   useEffect(() => {
     getDate();
@@ -51,7 +50,6 @@ export default function Home({ states }) {
       const res = await axios.get(
         `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${stateId}`
       );
-      console.log("res >>>>>>>>>>", res);
       const data = await res?.data?.districts.map((d) => ({
         key: d.district_id,
         value: d.district_id,
