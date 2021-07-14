@@ -1,4 +1,4 @@
-#[LIVE DEMO](https://covid-vaccination-tracker-densecanand.vercel.app/)
+# [LIVE DEMO](https://covid-vaccination-tracker-densecanand.vercel.app/)
 
 ![COVID-VACCINATION-TRACKER](https://i.ibb.co/n3W2PQp/Screen-Shot-2021-07-13-at-11-55-28-PM.png)
 
