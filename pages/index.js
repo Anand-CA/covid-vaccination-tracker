@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { Dropdown } from "semantic-ui-react";
 import Card from "../components/Card";
 
-
-export default function Home({ states }) {
+export default function Home() {
   const [stateId, setStateId] = useState(0);
   const [districts, setDistricts] = useState([]);
   const [districtId, setDistrictId] = useState(0);
@@ -24,7 +23,11 @@ export default function Home({ states }) {
 
   useEffect(() => {
     const structureState = async () => {
-      const data = await states?.map((s) => ({
+      const res = await axios.get(
+        "https://cdn-api.co-vin.in/api/v2/admin/location/states"
+      );
+      console.log(res);
+      const data = await res.data.states?.map((s) => ({
         key: s.state_id,
         value: s.state_id,
         text: s.state_name,
@@ -32,7 +35,7 @@ export default function Home({ states }) {
       setStates(data);
     };
     structureState();
-  }, [states]);
+  }, []);
 
   useEffect(() => {
     getDate();
@@ -126,23 +129,4 @@ export default function Home({ states }) {
       )}
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const statesRes = await fetch(
-    "https://cdn-api.co-vin.in/api/v2/admin/location/states",
-    {
-      method: "GET",
-      headers: {
-        "User-Agent": "*",
-        Accept: "application/json; charset=UTF-8",
-      },
-    }
-  );
-  const States = await statesRes.json();
-  return {
-    props: {
-      states: States.states,
-    },
-  };
 }
